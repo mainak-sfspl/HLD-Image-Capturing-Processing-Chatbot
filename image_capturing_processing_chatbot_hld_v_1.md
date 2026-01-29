@@ -548,5 +548,287 @@ AI --> RESP["Final Answer"]
 
 This architecture works like a careful human assistant who **checks, cleans, reads, understands, remembers, and then answers using only facts**.
 
+# 🧾 OCR Engines – Complete Difference Table (All Practical Points)
+
+## Compared OCRs
+- Tesseract OCR  
+- PaddleOCR  
+- EasyOCR  
+- OCRmyPDF  
+- Keras-OCR  
+
+---
+
+## 🔍 1. General & Legal
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| License | Apache 2.0 | Apache 2.0 | Apache 2.0 | MIT | MIT |
+| Free for commercial use | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| Vendor lock-in | ❌ None | ❌ None | ❌ None | ❌ None | ❌ None |
+| Community maturity | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Enterprise adoption | Very high | High | Medium | Medium | Low |
+
+---
+
+## ⚙️ 2. Installation & Setup (Azure UAT VM)
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Install complexity | Very low | Medium | Low | Very low | High |
+| OS dependency pain | Low | Medium | Low | Low | High |
+| Python required | ❌ Optional | ✅ Yes | ✅ Yes | ❌ Optional | ✅ Yes |
+| GPU required | ❌ No | ❌ No (optional) | ❌ No | ❌ No | ⚠️ Recommended |
+| Azure VM friendly | ✅ Excellent | ✅ Yes (tuning needed) | ✅ Yes | ✅ Yes | ⚠️ Risky |
+| Docker friendly | ✅ Excellent | ✅ Yes | ✅ Yes | ✅ Yes | ⚠️ Heavy |
+
+---
+
+## 🧠 3. OCR Capability & Accuracy
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Printed text accuracy | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Screenshot accuracy | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
+| Handwritten text | ❌ Poor | ⚠️ Medium | ⚠️ Medium | ❌ Poor | ⚠️ Medium |
+| Low-quality images | ⚠️ Medium | ⭐⭐⭐⭐ | ⭐⭐ | ⚠️ Medium | ⭐⭐ |
+| Mixed fonts | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Curved text | ❌ Weak | ⚠️ Partial | ⚠️ Partial | ❌ No | ⚠️ Partial |
+
+---
+
+## 📐 4. Layout, Tables & Structure
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Table detection | ❌ No | ✅ Yes | ❌ No | ❌ No | ❌ No |
+| Form structure | ❌ No | ✅ Yes | ⚠️ Limited | ❌ No | ❌ No |
+| Column awareness | ❌ No | ✅ Yes | ❌ No | ❌ No | ❌ No |
+| Bounding boxes | ✅ Yes | ✅ Excellent | ⚠️ Basic | ❌ No | ⚠️ Yes |
+| Layout ordering | ❌ No | ✅ Yes | ❌ No | ❌ No | ❌ No |
+
+---
+
+## 🌍 5. Language Support
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Number of languages | 100+ | 80+ | 80+ | Same as Tesseract | Limited |
+| Indic languages | ✅ Strong | ✅ Strong | ⚠️ Medium | Depends | ⚠️ Medium |
+| Mixed languages | ⚠️ Partial | ✅ Good | ⚠️ Partial | ⚠️ Partial | ❌ Weak |
+| Language auto-detect | ⚠️ Limited | ✅ Yes | ✅ Yes | ❌ No | ❌ No |
+
+---
+
+## 🚀 6. Performance & Resource Usage (CPU VM)
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| CPU speed | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| RAM usage | Low | Medium–High | Medium | Low | High |
+| Parallel processing | ⚠️ Manual | ✅ Good | ⚠️ Limited | ❌ No | ⚠️ Manual |
+| Large batch handling | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+
+---
+
+## 🧩 7. Integration & Pipeline Fit (Chatbot / RAG)
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Easy to call from Python | ✅ Yes | ✅ Yes | ✅ Yes | ⚠️ Indirect | ⚠️ Yes |
+| JSON-friendly output | ⚠️ Needs parsing | ✅ Yes | ✅ Yes | ❌ No | ⚠️ Yes |
+| Confidence scores | ⚠️ Limited | ✅ Good | ✅ Good | ❌ No | ⚠️ Yes |
+| Good for RAG grounding | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Chatbot-ready | ✅ Yes | ✅ Best | ⚠️ Yes | ⚠️ Limited | ❌ Poor |
+
+---
+
+## 🧪 8. Maintenance & Ops (Azure UAT → Prod)
+
+| Point | Tesseract | PaddleOCR | EasyOCR | OCRmyPDF | Keras-OCR |
+|---|---|---|---|---|---|
+| Debuggability | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Upgrade risk | Low | Medium | Low | Low | High |
+| Model version control | ❌ No | ✅ Yes | ⚠️ Limited | ❌ No | ⚠️ Manual |
+| Ops complexity | Low | Medium | Low | Low | High |
+
+---
+
+## 🏁 9. Best-Fit Use Cases
+
+| Use Case | Best OCR |
+|---|---|
+| Simple documents, screenshots | Tesseract |
+| Forms, tables, structured docs | PaddleOCR |
+| Quick demo / PoC | EasyOCR |
+| Scanned PDFs | OCRmyPDF |
+| Research / experiments | Keras-OCR |
+
+---
+
+## 🏆 Final Verdict (No Sugar-Coating)
+
+| Scenario | Recommendation |
+|---|---|
+| Azure UAT VM, stability first | Tesseract OCR |
+| Accuracy + future GPU scaling | PaddleOCR |
+| Fastest MVP demo | EasyOCR |
+| PDF-only pipeline | OCRmyPDF |
+| Production system | ❌ Not Keras-OCR |
+
+---
+
+## 🎯 One-Line Decision Rule
+
+**If you want boring, stable, and reliable → Tesseract.**  
+**If you want smarter, layout-aware, and future-ready → PaddleOCR.**
+
+# Hybrid OCR Decision Flow (Production-Friendly)
+
+This document describes a **hybrid OCR selection strategy** where the system **auto-selects the best OCR engine per image** to maximize accuracy while controlling cost and latency (ideal for Azure UAT VM deployments).
+
+---
+
+## ✅ OCR Engines in the Hybrid Pool
+
+- **Tesseract OCR** — fast, stable for screenshots and clean documents  
+- **PaddleOCR** — best for forms, tables, and complex layouts  
+- **EasyOCR** — fallback for odd fonts / mixed spacing  
+- **OCRmyPDF** — best for scanned PDFs (wraps OCR into PDF flow)  
+
+---
+
+## 🧩 Decision Rules (Simple Table)
+
+| Image Condition | OCR Chosen | Why |
+|---|---|---|
+| Screenshot / clean document | **Tesseract** | Fast & accurate |
+| Form / table / columns | **PaddleOCR** | Layout-aware |
+| Low confidence from Tesseract | **PaddleOCR** | Better detection |
+| Mixed fonts / weird spacing | **EasyOCR** | CNN-based fallback |
+| Scanned PDF | **OCRmyPDF → Tesseract** | Best PDF OCR pipeline |
+| OCR failed | **Fallback chain** | Reliability, never return empty |
+
+---
+
+## 🔄 One-Page Hybrid OCR Flow (Mermaid)
+
+> Mermaid is written in a “safe” format (no HTML tags) so it renders in most Markdown viewers.
+
+```mermaid
+flowchart TB
+
+A["Image Uploaded"] --> B["Image Quality Check (OpenCV)"]
+
+B --> C["Image Type Detection"]
+C -->|PDF| PDF["OCRmyPDF -> Tesseract"]
+C -->|Image| D["Preprocess Image (OpenCV)"]
+
+D --> E["Quick OCR Attempt (Tesseract)"]
+
+E --> F{"Confidence >= Threshold?"}
+
+F -->|Yes| OUT1["Use Tesseract Result"]
+
+F -->|No| G["Layout Check (tables / columns?)"]
+
+G -->|Yes| PADDLE["Run PaddleOCR"]
+
+G -->|No| EASY["Run EasyOCR"]
+
+PADDLE --> H{"Confidence OK?"}
+EASY --> H
+
+H -->|Yes| OUT2["Use Selected OCR Result"]
+H -->|No| FALL["Fallback OCR Chain"]
+
+FALL --> OUT3["Best Available OCR Result"]
+
+OUT1 --> FINAL["Send Text to RAG / Chatbot"]
+OUT2 --> FINAL
+OUT3 --> FINAL
+```
+
+---
+
+## 🧠 What Each Step Does (Layman-Friendly)
+
+### 1) Image arrives
+User uploads an image. Nothing “AI” happens yet.
+
+### 2) Quality check (OpenCV)
+System checks blur, darkness, rotation, and fixes basic issues so OCR becomes accurate.
+
+### 3) Detect image type
+- If it is a **PDF**: run **OCRmyPDF**
+- If it is a normal image: continue pipeline
+
+### 4) First OCR attempt (Tesseract)
+We try **Tesseract first** because it is cheap, fast, and stable on CPU VMs.
+
+### 5) Confidence check
+If output quality is good enough, stop and use the result (save cost and time).
+
+### 6) Layout check
+If output is weak, decide whether this looks like a form/table/columns.  
+If yes → use **PaddleOCR**.
+
+### 7) Non-layout issues
+If not a form/table but text is still bad → use **EasyOCR**.
+
+### 8) Fallback chain
+If results are still poor, return the **best partial output** (never blank).  
+This avoids chatbot hallucination.
+
+---
+
+## ⚙️ Recommended Thresholds (Good Defaults)
+
+| Metric | Suggested Value |
+|---|---|
+| Confidence threshold | 70% |
+| Minimum word count | 10 |
+| OCR engine retries | max 2 |
+| Timeout per OCR call | 3–5 seconds |
+| Azure UAT VM baseline | 4 vCPU, 8 GB RAM |
+
+---
+
+## 🧾 Backend Pseudo-Logic
+
+```text
+if file is PDF:
+    run OCRmyPDF
+    return result
+
+run Tesseract
+if confidence OK:
+    return result
+
+if layout detected:
+    run PaddleOCR
+else:
+    run EasyOCR
+
+if still low confidence:
+    return best partial result
+```
+
+---
+
+## 🎯 Why This Hybrid Flow Is Smart
+
+- Uses **fast OCR first**
+- Uses **heavy OCR only when needed**
+- Controls Azure VM cost
+- Improves accuracy on real-world data
+- Reduces hallucination (AI answers based on extracted facts)
+
+---
+
+## 🏁 Executive One-Liner
+
+**We don’t choose one OCR. We let the image choose the OCR.**
+
 **End of Document**
 
