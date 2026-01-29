@@ -348,303 +348,205 @@ flowchart LR
 - Aggressive caching
 
 ---
-🧠 Architecture Flow — Explained Like a Human Story
 
-Think of this system as a very disciplined office assistant who follows fixed steps every time someone gives them a photo.
+# Image Understanding Chatbot — Architecture Flow (Layman Version)
 
-🧍 Step 1: User uploads an image
+## 🧠 Architecture Flow — Explained Like a Human Story
 
-(Phone / Laptop / Browser)
+Think of this system as a **very disciplined office assistant** who follows fixed steps every time someone gives them a photo.
 
-What happens
+---
 
-A person uploads a photo, screenshot, or scanned document.
+## 🧍 Step 1: User uploads an image
+**(Phone / Laptop / Browser)**
 
-Why this step exists
+**What happens**
+- A person uploads a photo, screenshot, or scanned document.
 
-This is the entry point. Nothing fancy yet.
+**Why this step exists**
+- This is the entry point. Nothing fancy yet.
 
-Tools used
+**Tools used**
+- Browser upload (HTML, mobile camera)
 
-Normal browser upload (HTML / mobile camera)
+---
 
-✅ Reason we chose this
+## 🚪 Step 2: Frontend sends image to the backend (Server)
 
-Everyone already knows how to upload images.
+**What happens**
+- The image is sent to the server safely.
+- The user sees a preview immediately.
 
-No learning curve.
+**Why**
+- Fast feedback so the user knows the upload worked.
 
-🚪 Step 2: Frontend sends image to the backend (Server)
+**Tools**
+- Browser APIs  
+- FastAPI
 
-What happens
+---
 
-The image is sent to the server safely.
-
-The user sees a preview immediately.
-
-Why
-
-Fast feedback so the user knows the upload worked.
-
-Tools
-
-Web browser APIs
-
-FastAPI (backend)
-
-✅ Why FastAPI
-
-Simple
-
-Fast
-
-Stable
-
-Widely used in production
-
-🛂 Step 3: Image Quality & Safety Check (Gatekeeper)
+## 🛂 Step 3: Image Quality & Safety Check (Gatekeeper)
 
 Before doing any smart work, the system asks:
+> “Is this image even worth processing?”
 
-“Is this image even worth processing?”
+**Checks**
+- Is the file real?
+- Is it blurry or dark?
+- Is it a supported format?
+- Is it a duplicate?
 
-Checks
+**Tools**
+- OpenCV
 
-Is the file real or fake?
+**Why this step is critical**
+- Bad image = bad answer  
+- Saves time and money
 
-Is it too blurry?
+---
 
-Is it too dark?
+## 🧹 Step 4: Image Cleaning (Like wiping glasses)
 
-Is it a supported format?
+**What we do**
+- Resize
+- Remove noise
+- Fix rotation
+- Improve contrast
 
-Is it a duplicate?
+**Tools**
+- OpenCV
 
-Tools
+---
 
-OpenCV
+## 📝 Step 5: Read the text inside the image (OCR)
 
-✅ Why OpenCV
+**Examples**
+- Bills
+- Error messages
+- Forms
+- IDs
 
-Old, trusted, battle-tested
+**Tool**
+- Tesseract OCR
 
-Very fast
+**Why**
+- Accurate, offline, free
 
-Free
+---
 
-Used by millions of systems
-
-🚫 Why this step is critical
-
-Bad image = bad answer
-
-Saves money
-
-Saves time
-
-Avoids garbage results
-
-🧹 Step 4: Image Cleaning (Like wiping glasses before reading)
-
-If the image passes the gate:
-
-What we do
-
-Resize it
-
-Remove noise
-
-Fix rotation
-
-Improve contrast
-
-Why
-
-Machines read clean images better (just like humans).
-
-Tools
-
-OpenCV
-
-✅ Why again OpenCV
-
-Same tool, multiple jobs
-
-Less complexity
-
-Proven accuracy
-
-📝 Step 5: Read the text inside the image
-
-Now the system asks:
-
-“Is there any written text here?”
-
-Examples
-
-Bills
-
-Error messages
-
-Forms
-
-IDs
-
-Tool
-
-Tesseract OCR
-
-✅ Why Tesseract
-
-Free
-
-Works offline
-
-Very reliable for printed text
-
-Used by governments and enterprises
-
-🚫 Why not fancy paid OCR
-
-Cost
-
-Lock-in
-
-No real benefit for our use case
-
-👀 Step 6: Understand what the image shows (Not text)
+## 👀 Step 6: Understand what the image shows (Non-text)
 
 Even if there is no text, images still have meaning.
 
-Examples
+**Examples**
+- Laptop screen
+- Phone
+- Document
+- Error screenshot
 
-Laptop screen
+**Tools**
+- YOLO (object detection)
+- BLIP (image description)
+- LLaVA (image + question reasoning)
 
-Phone
+---
 
-Document
+## 🧩 Step 7: Combine everything into ONE understanding
 
-Error screenshot
+**Merged data**
+- Text from OCR
+- Objects detected
+- Image description
+- Image quality
 
-Equipment
+**Why**
+- AI answers only from facts
+- No guessing or hallucination
 
-Tools used
+---
 
-YOLO → finds objects
+## 🗄️ Step 8: Save useful information
 
-BLIP → explains image in words
+**What gets stored**
+- Image
+- Extracted text
+- Image meaning
+- Vector fingerprints
 
-LLaVA → understands image + question together
+**Tools**
+- MinIO / S3 (image storage)
+- PostgreSQL (metadata)
+- pgvector / Qdrant (similarity search)
 
-✅ Why these
+---
 
-Open-source
-
-High accuracy
-
-Community trusted
-
-No vendor lock-in
-
-Think of this as:
-
-“Okay, I can see a laptop with an error screen.”
-
-🧩 Step 7: Combine everything into ONE clean understanding
-
-Now we merge:
-
-Text from image
-
-Objects detected
-
-Image description
-
-Image quality info
-
-This becomes a structured summary of the image.
-
-Why this is important
-
-Chatbot answers ONLY from this data
-
-No guessing
-
-No hallucination
-
-🧠 This is the brain moment
-
-🗄️ Step 8: Save useful information for future
-
-What gets stored
-
-Image (secure storage)
-
-Extracted text
-
-Image meaning
-
-Numeric “fingerprint” of the image
-
-Tools
-
-MinIO / S3 → image storage
-
-Postgres → metadata
-
-pgvector / Qdrant → similarity search
-
-✅ Why these
-
-Cheap
-
-Reliable
-
-Easy to manage
-
-Industry standard
-
-🔍 Step 9: Search old knowledge (If needed)
+## 🔍 Step 9: Search old knowledge (If needed)
 
 If user asks:
+> “Have we seen this before?”
 
-“Have we seen this before?”
+**Tools**
+- Vector DB (pgvector / Qdrant)
 
-System:
+---
 
-Searches similar images
+## 🗣️ Step 10: Final Answer to User
 
-Searches similar text
+**How AI answers**
+- Based on extracted facts
+- Based on stored knowledge
+- Never guesses
 
-Brings past answers
+**Tool**
+- LLM / VLM
 
-Tools
+---
 
-Vector databases (pgvector / Qdrant)
+## 🧰 Tool Summary
 
-✅ Why vector search
+| Tool | What it does | Why chosen |
+|----|----|----|
+| OpenCV | Image cleaning & checks | Fast, free |
+| Tesseract | OCR | Reliable, offline |
+| YOLO | Object detection | Accurate |
+| BLIP | Image caption | Simple |
+| LLaVA | Image reasoning | Open-source |
+| FastAPI | Backend | Stable |
+| PostgreSQL | Data storage | Rock-solid |
+| pgvector / Qdrant | Similarity search | Best fit |
+| MinIO | Image storage | Cheap & safe |
 
-Normal search fails for images
+---
 
-Vector search finds “similar meaning”
+## 🧩 One-Page Architecture Diagram (Mermaid)
 
-🗣️ Step 10: Final Answer to User
+```mermaid
+flowchart TB
 
-Now the chatbot answers:
+U["User uploads image"] --> FE["Web/Mobile UI\nTools: Browser APIs"]
+FE --> API["API Gateway\nTools: FastAPI"]
+API --> QC["Quality Check\nTools: OpenCV"]
+QC -->|Bad| REJ["Reject & Re-upload"]
+QC -->|Good| PRE["Preprocess Image\nTools: OpenCV"]
+PRE --> OCR["OCR\nTools: Tesseract"]
+PRE --> VIS["Visual Understanding\nTools: YOLO + BLIP + LLaVA"]
+OCR --> FUSE["Signal Fusion"]
+VIS --> FUSE
+FUSE --> EMB["Embeddings\nTools: CLIP"]
+EMB --> VDB["Vector DB\npgvector / Qdrant"]
+FUSE --> META["Metadata\nPostgreSQL"]
+FUSE --> OBJ["Image Storage\nMinIO"]
+VDB --> AI["Answer Generation\nLLM/VLM"]
+META --> AI
+AI --> RESP["Final Answer"]
+```
 
-Based on extracted facts
+---
 
-Based on past knowledge
+## 🎯 One-line summary
 
-Based on image understanding
-
-Tool
-
-LLM (Language Model)
-
-🚫 Important rule
-
-The AI is NOT allowed to answer unless it has evidence.
+This architecture works like a careful human assistant who **checks, cleans, reads, understands, remembers, and then answers using only facts**.
 
 **End of Document**
 
