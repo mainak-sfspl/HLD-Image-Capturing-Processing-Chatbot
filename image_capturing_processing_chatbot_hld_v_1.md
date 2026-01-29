@@ -348,6 +348,303 @@ flowchart LR
 - Aggressive caching
 
 ---
+🧠 Architecture Flow — Explained Like a Human Story
+
+Think of this system as a very disciplined office assistant who follows fixed steps every time someone gives them a photo.
+
+🧍 Step 1: User uploads an image
+
+(Phone / Laptop / Browser)
+
+What happens
+
+A person uploads a photo, screenshot, or scanned document.
+
+Why this step exists
+
+This is the entry point. Nothing fancy yet.
+
+Tools used
+
+Normal browser upload (HTML / mobile camera)
+
+✅ Reason we chose this
+
+Everyone already knows how to upload images.
+
+No learning curve.
+
+🚪 Step 2: Frontend sends image to the backend (Server)
+
+What happens
+
+The image is sent to the server safely.
+
+The user sees a preview immediately.
+
+Why
+
+Fast feedback so the user knows the upload worked.
+
+Tools
+
+Web browser APIs
+
+FastAPI (backend)
+
+✅ Why FastAPI
+
+Simple
+
+Fast
+
+Stable
+
+Widely used in production
+
+🛂 Step 3: Image Quality & Safety Check (Gatekeeper)
+
+Before doing any smart work, the system asks:
+
+“Is this image even worth processing?”
+
+Checks
+
+Is the file real or fake?
+
+Is it too blurry?
+
+Is it too dark?
+
+Is it a supported format?
+
+Is it a duplicate?
+
+Tools
+
+OpenCV
+
+✅ Why OpenCV
+
+Old, trusted, battle-tested
+
+Very fast
+
+Free
+
+Used by millions of systems
+
+🚫 Why this step is critical
+
+Bad image = bad answer
+
+Saves money
+
+Saves time
+
+Avoids garbage results
+
+🧹 Step 4: Image Cleaning (Like wiping glasses before reading)
+
+If the image passes the gate:
+
+What we do
+
+Resize it
+
+Remove noise
+
+Fix rotation
+
+Improve contrast
+
+Why
+
+Machines read clean images better (just like humans).
+
+Tools
+
+OpenCV
+
+✅ Why again OpenCV
+
+Same tool, multiple jobs
+
+Less complexity
+
+Proven accuracy
+
+📝 Step 5: Read the text inside the image
+
+Now the system asks:
+
+“Is there any written text here?”
+
+Examples
+
+Bills
+
+Error messages
+
+Forms
+
+IDs
+
+Tool
+
+Tesseract OCR
+
+✅ Why Tesseract
+
+Free
+
+Works offline
+
+Very reliable for printed text
+
+Used by governments and enterprises
+
+🚫 Why not fancy paid OCR
+
+Cost
+
+Lock-in
+
+No real benefit for our use case
+
+👀 Step 6: Understand what the image shows (Not text)
+
+Even if there is no text, images still have meaning.
+
+Examples
+
+Laptop screen
+
+Phone
+
+Document
+
+Error screenshot
+
+Equipment
+
+Tools used
+
+YOLO → finds objects
+
+BLIP → explains image in words
+
+LLaVA → understands image + question together
+
+✅ Why these
+
+Open-source
+
+High accuracy
+
+Community trusted
+
+No vendor lock-in
+
+Think of this as:
+
+“Okay, I can see a laptop with an error screen.”
+
+🧩 Step 7: Combine everything into ONE clean understanding
+
+Now we merge:
+
+Text from image
+
+Objects detected
+
+Image description
+
+Image quality info
+
+This becomes a structured summary of the image.
+
+Why this is important
+
+Chatbot answers ONLY from this data
+
+No guessing
+
+No hallucination
+
+🧠 This is the brain moment
+
+🗄️ Step 8: Save useful information for future
+
+What gets stored
+
+Image (secure storage)
+
+Extracted text
+
+Image meaning
+
+Numeric “fingerprint” of the image
+
+Tools
+
+MinIO / S3 → image storage
+
+Postgres → metadata
+
+pgvector / Qdrant → similarity search
+
+✅ Why these
+
+Cheap
+
+Reliable
+
+Easy to manage
+
+Industry standard
+
+🔍 Step 9: Search old knowledge (If needed)
+
+If user asks:
+
+“Have we seen this before?”
+
+System:
+
+Searches similar images
+
+Searches similar text
+
+Brings past answers
+
+Tools
+
+Vector databases (pgvector / Qdrant)
+
+✅ Why vector search
+
+Normal search fails for images
+
+Vector search finds “similar meaning”
+
+🗣️ Step 10: Final Answer to User
+
+Now the chatbot answers:
+
+Based on extracted facts
+
+Based on past knowledge
+
+Based on image understanding
+
+Tool
+
+LLM (Language Model)
+
+🚫 Important rule
+
+The AI is NOT allowed to answer unless it has evidence.
 
 **End of Document**
 
